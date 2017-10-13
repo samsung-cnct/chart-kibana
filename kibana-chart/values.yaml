@@ -12,7 +12,7 @@ image: quay.io/samsung_cnct/kibana-container:latest
 cpu_limit: 100m
 cpu_requests: 100m
 env_name: ELASTICSEARCH_URL
-env_value: http://elasticsearch.kube-system:9200
+env_value: http://elasticsearch:9200
 container_port: 5601
 tolerations:
  # - key: taintKey
