@@ -7,7 +7,7 @@ port: 5601
 component: kibana-logging
 replicas: 3
 container_name: kibana-logging
-image: quay.io/samsung_cnct/kibana-container:latest
+image: quay.io/samsung_cnct/kibana-container:v0.0.1
 # keep request = limit to keep this container in guaranteed class
 cpu_limit: 100m
 cpu_requests: 100m
