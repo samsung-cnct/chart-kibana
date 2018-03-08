@@ -7,13 +7,42 @@ metadata:
     kubernetes.io/cluster-service: "true"
     kubernetes.io/name: "Kibana"
 spec:
-  type: LoadBalancer
+  type: {{ .Values.service.type }}
   selector:
     component: {{.Values.component}}
   ports:
     - name: http
       port: {{.Values.port}}
       protocol: TCP
+---
+{{- if .Values.ingress.enabled }}
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: {{.Values.name}}
+  {{- if .Values.ingress.annotations }}
+  annotations:
+    {{- range .Values.ingress.annotations }}
+    {{ .key }}: {{ .value }}
+    {{- end }}
+  {{- end }}
+  spec:
+    {{- if .Values.ingress.tls.enabled }}
+    tls:
+    - hosts: 
+      - {{ .Values.ingress.host }}
+      secretName: "{{.Values.name}}-tls"
+    {{- end }}
+    rules:
+    - host: {{ .Values.ingress.host }}
+      http:
+        paths:
+        - path: /
+          backend:
+            serviceName: {{.Values.name}}
+            servicePort: {{.Values.port}}
+
+{{- end }}
 ---
 apiVersion: extensions/v1beta1
 kind: Deployment

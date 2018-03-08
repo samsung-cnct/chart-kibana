@@ -20,6 +20,24 @@ tolerations:
  #   operator: Equal
  #   effect: NoSchedule
 
+
+#  default type is LoadBalancer, recommended type is ClusterIP + Ingress
+service:
+  type: LoadBalancer
+
+#  disabled by default as not all kubernetes clusters will have a default
+#  ingress controller available
+ingress:
+  enabled: false
+  annotations:
+  - key: kubernetes.io/tls-acme
+    value: "true"
+  - key: kubernetes.io/ingress.class
+    value: "nginx"
+  tls:
+    enabled: false  #  enabling this assumes you have kube-lego running and assumes ingress.host is the same for tls  
+  host: kibana.externally-visible-dns.org
+
 scheduling:
   affinity:
     node:

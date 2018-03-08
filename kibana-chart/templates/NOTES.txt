@@ -1,0 +1,3 @@
+On first login to the kibana dashboard, kibana will ask you to configure the default index.  This is normal and should only take a
+few moments.  You should be selecting '@timestamp' as the timestamp field.  Everything else should be auto-populated by kibana with
+sensible defaults.
