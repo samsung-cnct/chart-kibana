@@ -34,9 +34,16 @@ ingress:
     value: "true"
   - key: kubernetes.io/ingress.class
     value: "nginx"
+  - key: ingress.kubernetes.io/auth-type
+    value: basic
+  - key: ingress.kubernetes.io/auth-secret
+    value: basic-auth
+  - key: ingress.kubernetes.io/auth-realm
+    value: "Authentication required for kibana"
   tls:
     enabled: false  #  enabling this assumes you have kube-lego running and assumes ingress.host is the same for tls  
   host: kibana.externally-visible-dns.org
+  auth: "uid:pwd"  #  username and password for accessing kibana.  set to empty for no auth
 
 scheduling:
   affinity:

@@ -44,6 +44,16 @@ spec:
 
 {{- end }}
 ---
+{{- if .Values.ingress.auth }}
+apiVersion: v1
+kind: Secret
+metadata:
+  name: {{ .Values.name }}-kibana-auth
+type: Opaque
+data:
+  auth: {{ .Values.ingress.auth | b64enc | quote }}
+{{- end }}
+---
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
