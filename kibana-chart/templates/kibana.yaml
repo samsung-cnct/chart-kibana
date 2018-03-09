@@ -42,7 +42,7 @@ spec:
           serviceName: {{.Values.name}}
           servicePort: {{.Values.port}}
 
-{- end }}
+{{- end }}
 ---
 apiVersion: extensions/v1beta1
 kind: Deployment
