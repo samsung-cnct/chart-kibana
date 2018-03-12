@@ -43,7 +43,7 @@ ingress:
   tls:
     enabled: false  #  enabling this assumes you have kube-lego running and assumes ingress.host is the same for tls  
   host: kibana.externally-visible-dns.org
-  auth: "uid:pwd\\n"  #  username and password for accessing kibana.  set to empty for no auth
+  auth: "uid:<MD5 has of password>\n"  #  username and password for accessing kibana.  set to empty for no auth, recommend using `htpasswd` locally and copying resultant MD5
 
 scheduling:
   affinity:
