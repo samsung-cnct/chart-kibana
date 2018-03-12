@@ -20,6 +20,31 @@ tolerations:
  #   operator: Equal
  #   effect: NoSchedule
 
+
+#  default type is LoadBalancer, recommended type is ClusterIP + Ingress
+service:
+  type: LoadBalancer
+
+#  disabled by default as not all kubernetes clusters will have a default
+#  ingress controller available
+ingress:
+  enabled: false
+  annotations:
+  - key: kubernetes.io/tls-acme
+    value: "true"
+  - key: kubernetes.io/ingress.class
+    value: "nginx"
+  - key: ingress.kubernetes.io/auth-type
+    value: basic
+  - key: ingress.kubernetes.io/auth-secret
+    value: basic-auth
+  - key: ingress.kubernetes.io/auth-realm
+    value: "Authentication required for kibana"
+  tls:
+    enabled: false  #  enabling this assumes you have kube-lego running and assumes ingress.host is the same for tls  
+  host: kibana.externally-visible-dns.org
+  auth: "uid:<MD5 has of password>\n"  #  username and password for accessing kibana.  set to empty for no auth, recommend using `htpasswd` locally and copying resultant MD5
+
 scheduling:
   affinity:
     node:
