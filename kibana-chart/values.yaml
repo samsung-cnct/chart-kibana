@@ -11,6 +11,8 @@ image: quay.io/samsung_cnct/kibana-container:v0.0.1
 # keep request = limit to keep this container in guaranteed class
 cpu_limit: 100m
 cpu_requests: 100m
+mem_limit: 250Mi
+mem_requests: 250Mi
 env_name: ELASTICSEARCH_URL
 env_value: http://elasticsearch:9200
 container_port: 5601

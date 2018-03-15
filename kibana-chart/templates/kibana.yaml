@@ -72,8 +72,10 @@ spec:
         resources:
           limits:
             cpu: {{.Values.cpu_limit}}
+            mem: {{.Values.mem_limit}}
           requests:
             cpu: {{.Values.cpu_requests}}
+            mem: {{.Values.mem_requests}}
         env:
           - name: "{{.Values.env_name}}"
             value: "{{.Values.env_value}}"
