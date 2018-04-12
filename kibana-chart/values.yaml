@@ -7,7 +7,7 @@ port: 5601
 component: kibana-logging
 replicas: 3
 container_name: kibana-logging
-image: quay.io/samsung_cnct/kibana-container:v0.0.1
+image: quay.io/samsung_cnct/kibana-container:latest
 # keep request = limit to keep this container in guaranteed class
 cpu_limit: 100m
 cpu_requests: 100m
@@ -43,7 +43,7 @@ ingress:
   - key: ingress.kubernetes.io/auth-realm
     value: "Authentication required for kibana"
   tls:
-    enabled: false  #  enabling this assumes you have kube-lego running and assumes ingress.host is the same for tls  
+    enabled: false  #  enabling this assumes you have kube-lego running and assumes ingress.host is the same for tls
   host: kibana.externally-visible-dns.org
   auth: "uid:<MD5 has of password>\n"  #  username and password for accessing kibana.  set to empty for no auth, recommend using `htpasswd` locally and copying resultant MD5
 
