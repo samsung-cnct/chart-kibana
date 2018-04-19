@@ -1,0 +1,8 @@
+.DS_Store
+.git
+.github
+.gitignore
+CODEOWNERS
+Jenkinsfile
+LICENSE
+README.md

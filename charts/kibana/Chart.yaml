@@ -1,5 +1,6 @@
-name: kibana-chart
-version: ${CHART_VER}-${CHART_REL}
+---
+name: kibana
+version: 0.0.0
 description: Sample chart template for registry
 keywords:
 - kraken
