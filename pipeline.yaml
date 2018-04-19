@@ -1,0 +1,30 @@
+type: chart
+envValues:
+  - envVar: KUBECTL_VERSION
+    value: v1.9.2
+rootfs:
+  - image: samsung_cnct/kibana
+    buildArgs:
+      KUBECTL_VERSION: "v1.9.2"
+    context: kibana
+    chart: kibana
+    value: kibana.image
+configs:
+  - chart: kibana
+    timeout: 600
+    retries: 1
+    release: kibana
+    test:
+      values:
+    stage:
+      values:
+test:
+  beforeScript:
+    script: build/test.sh
+    shell: bash
+stage:
+  beforeScript:
+    script: build/test.sh
+    shell: bash
+prod:
+  doDeploy: none
