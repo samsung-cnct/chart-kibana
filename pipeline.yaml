@@ -1,10 +1,5 @@
 ---
 type: chart
-rootfs:
-  - image: samsung_cnct/kibana
-    context: kibana
-    chart: kibana
-    value: image
 configs:
   - chart: kibana
     timeout: 600
