@@ -5,7 +5,7 @@ app: kibana-logging
 port: 5601
 # Deployment
 component: kibana-logging
-replicas: 3
+replicas: 1
 container_name: kibana-logging
 image: docker.elastic.co/kibana/kibana:6.2.4
 # keep request = limit to keep this container in guaranteed class
