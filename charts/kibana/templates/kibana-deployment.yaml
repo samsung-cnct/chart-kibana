@@ -21,8 +21,10 @@ spec:
             cpu: {{.Values.cpu_requests}}
             memory: {{.Values.mem_requests}}
         env:
-          - name: "{{.Values.env_name}}"
-            value: "{{.Values.env_value}}"
+        {{- range $key, $value := .Values.env }}
+          - name: "{{ $key }}"
+            value: "{{ $value }}"
+        {{- end }}
         ports:
         - containerPort: {{.Values.container_port}}
           name: ui
