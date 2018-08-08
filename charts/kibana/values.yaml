@@ -3,6 +3,7 @@
 name: kibana-logging
 app: kibana-logging
 port: 5601
+
 # Deployment
 component: kibana-logging
 replicas: 1
@@ -13,9 +14,18 @@ cpu_limit: 200m
 cpu_requests: 200m
 mem_limit: 4Gi
 mem_requests: 4Gi
-env_name: ELASTICSEARCH_URL
-env_value: http://elasticsearch:9200
 container_port: 5601
+
+env:
+  # All Kibana configuration options are adjustable via env vars.
+  # To adjust a config option to an env var uppercase + replace `.` with `_`
+  # Ref: https://www.elastic.co/guide/en/kibana/current/settings.html
+  ELASTICSEARCH_URL: http://elasticsearch:9200
+  XPACK_SECURITY_ENABLED: "true"
+  ELASTICSEARCH_USERNAME: elastic 
+  ELASTICSEARCH_PASSWORD: changeme
+  # LOGGING_VERBOSE: "true"
+  
 tolerations:
  # - key: taintKey
  #   value: taintValue
