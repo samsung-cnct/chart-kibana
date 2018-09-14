@@ -21,6 +21,16 @@ spec:
             cpu: {{.Values.cpu_requests}}
             memory: {{.Values.mem_requests}}
         env:
+          - name: ELASTICSEARCH_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                 name: {{ template "fullname" . }}-auth
+                 key: password
+          - name: ELASTICSEARCH_USERNAME
+            valueFrom:
+              secretKeyRef:
+                 name: {{ template "fullname" . }}-auth
+                 key: username
         {{- range $key, $value := .Values.env }}
           - name: "{{ $key }}"
             value: "{{ $value }}"
