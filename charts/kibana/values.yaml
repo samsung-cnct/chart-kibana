@@ -22,9 +22,14 @@ env:
   # Ref: https://www.elastic.co/guide/en/kibana/current/settings.html
   ELASTICSEARCH_URL: http://elasticsearch:9200
   XPACK_SECURITY_ENABLED: "true"
-  ELASTICSEARCH_USERNAME: elastic 
-  ELASTICSEARCH_PASSWORD: changeme
   # LOGGING_VERBOSE: "true"
+  #
+  #NOTE: THE PASSWORD SHOULD BE PASSED IN ON THE COMMAND LINE
+security:
+  # ELASTICSEARCH_USERNAME: 
+  username: elastic
+  # ELASTICSEARCH_PASSWORD:
+  password: changeme
   
 tolerations:
  # - key: taintKey
