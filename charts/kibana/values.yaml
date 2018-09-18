@@ -37,10 +37,25 @@ tolerations:
  #   operator: Equal
  #   effect: NoSchedule
 
-
-#  default type is LoadBalancer, recommended type is ClusterIP + Ingress
+#
+#  Service options
+#
+#  default type is LoadBalancer
+#  With annotation: loadBalancer + external-dns 
+#  
+#  NOTE: comment out the annotations, or specifically 
+#  the external-dns.alpha.kubernetes.io/hostname annotation and value, 
+#  if you are using an Ingress setup instead
+#
+#  recommended type is ClusterIP + Ingress
+#  (type: ClusterIP     ingress.enabled: true)
 service:
   type: LoadBalancer
+  annotations:
+    # Replace <mydomain>.cluster.cncnt.io with your real domain in route53
+    # NOTE: the default is an invalid domain and will not be created if not set correctly.
+  - key: external-dns.alpha.kubernetes.io/hostname
+    value: "kibana.<mydomain>.cluster.cnct.io"
 
 #  disabled by default as not all kubernetes clusters will have a default
 #  ingress controller available
