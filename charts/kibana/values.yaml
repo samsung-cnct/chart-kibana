@@ -55,8 +55,7 @@ service:
     # Replace <mydomin>.cluster.cncnt.io with your real domain in router53
     # NOTE: the default is an invalid domain and will not be created if not set corretctly.
   - key: external-dns.alpha.kubernetes.io/hostname
-    value: "kibana.mikeln.cluster.cnct.io"
-    #value: "kibana.<mydomain>.cluster.cnct.io"
+    value: "kibana.<mydomain>.cluster.cnct.io"
 
 #  disabled by default as not all kubernetes clusters will have a default
 #  ingress controller available
