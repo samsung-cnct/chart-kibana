@@ -38,7 +38,7 @@ tolerations:
  #   effect: NoSchedule
 
 #
-#  Serviee options
+#  Service options
 #
 #  default type is LoadBalancer
 #  With annotation: loadBalancer + external-dns 
@@ -52,8 +52,8 @@ tolerations:
 service:
   type: LoadBalancer
   annotations:
-    # Replace <mydomin>.cluster.cncnt.io with your real domain in router53
-    # NOTE: the default is an invalid domain and will not be created if not set corretctly.
+    # Replace <mydomain>.cluster.cncnt.io with your real domain in route53
+    # NOTE: the default is an invalid domain and will not be created if not set correctly.
   - key: external-dns.alpha.kubernetes.io/hostname
     value: "kibana.<mydomain>.cluster.cnct.io"
 
