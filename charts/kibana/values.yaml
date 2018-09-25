@@ -8,7 +8,7 @@ port: 5601
 component: kibana-logging
 replicas: 1
 container_name: kibana-logging
-image: docker.elastic.co/kibana/kibana:6.2.4
+image: docker.elastic.co/kibana/kibana:6.3.2
 # keep request = limit to keep this container in guaranteed class
 cpu_limit: 200m
 cpu_requests: 200m
