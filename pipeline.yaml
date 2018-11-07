@@ -2,8 +2,8 @@
 type: chart
 configs:
   - chart: kibana
-    timeout: 600
-    retries: 1
+    timeout: 1200
+    retries: 4
     release: kibana
     test:
       values:
