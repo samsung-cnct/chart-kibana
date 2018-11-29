@@ -1,7 +1,7 @@
 kind: Role
 apiVersion: rbac.authorization.k8s.io/v1beta1
 metadata:
-  namespace: default
+  namespace: {{ .Release.Namespace }}
   name: test-role
 rules:
 - apiGroups: ["", "extensions", "apps"]
@@ -12,11 +12,11 @@ kind: RoleBinding
 apiVersion: rbac.authorization.k8s.io/v1beta1
 metadata:
   name: test-role-binding
-  namespace: default
+  namespace: {{ .Release.Namespace }}
 subjects:
 - kind: ServiceAccount
   name: default
-  namespace: default
+  namespace: {{ .Release.Namespace }}
   apiGroup: ""
 roleRef:
   kind: Role
