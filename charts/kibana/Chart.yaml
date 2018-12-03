@@ -1,5 +1,5 @@
 name: kibana
-version: 0.1.8
+version: 0.1.9
 description: Sample chart template for registry
 keywords:
 - kubernetes
