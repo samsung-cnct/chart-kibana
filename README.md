@@ -3,3 +3,10 @@
 
 A Kibana Helm chart that provides data visualization for logs in your elasticsearch cluster.
 
+## Install
+To install the chart with the release name `kibana`:
+ ```
+ helm repo add cnct https://charts.migrations.cnct.io
+ helm repo update
+ helm install cnct/kibana --name kibana
+ ```  
