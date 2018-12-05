@@ -1,6 +1,5 @@
----
 name: kibana
-version: 0.1.6
+version: 0.1.9
 description: Sample chart template for registry
 keywords:
 - kubernetes
@@ -12,7 +11,7 @@ home: https://github.com/samsung-cnct/chart-kibana
 sources:
 - https://github.com/samsung-cnct/chart-kibana
 maintainers:
-- name: Samsung CNCT
-  email: samsung.cloudnative@gmail.com
+- name: Samsung CNCT OSS Maintainers
+  email: oss-maintainer@samsung-cnct.io
 icon: https://github.com/samsung-cnct/solas/docs/images/samsung-logo.svg
 engine: gotpl

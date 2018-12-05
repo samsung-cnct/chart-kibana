@@ -1,0 +1,64 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ printf "%s-%s" .Release.Name "kibanatest" | trunc 63 }}
+data:
+  run.sh: |-
+    K_ENDPOINT=""
+    CACERT_FILE="/var/run/secrets/kubernetes.io/serviceaccount/ca.crt"
+    TOKEN="$(< /var/run/secrets/kubernetes.io/serviceaccount/token)"
+    KIBANA_FILE="/testfiles/kibana.txt"
+    KUBEAPI_URL="https://kubernetes.default.svc/api/v1/namespaces/{{ .Release.Namespace }}/services/kibana-logging"
+
+    # test 1
+    @test "Grab kibana endpoint via curl kubeapi" {
+      echo "" >&3
+      echo "=====================================" >&3
+      echo "KUBEAPI URL is: $KUBEAPI_URL" >&3
+      echo "PWD is: $PWD" >&3
+      echo "" >&3
+      echo "=====================================" >&3
+      run curl --cacert $CACERT_FILE --header "Authorization: Bearer $TOKEN" \
+               --header "Content-Type: application/json" \
+               --write-out "\n\n{\"status\": \"%{http_code}\"}" \
+               -X GET $KUBEAPI_URL -o $KIBANA_FILE
+    }
+
+    # test 2
+    @test "Test that kibana comes up" {
+      GOOD=1
+      RESP=0
+      INVALID=0
+      ATTEMPTS=1
+      MAX_ATTEMPTS=10
+
+      echo "" >&3
+      echo "---------------------------" >&3
+      # Get the Kibana endpoint
+      K_ENDPOINT=$(< $KIBANA_FILE jq -M -r '.spec.clusterIP' )
+      echo "K_ENDPOINT is: $K_ENDPOINT" >&3
+      while [[ $ATTEMPTS -lt $MAX_ATTEMPTS ]]; do
+        echo "--------------------------------" >&3
+        echo "Trying: $ATTEMPTS/$MAX_ATTEMPTS:" >&3
+        run curl -s --connect-timeout 5 \
+            -o /dev/null      \
+            -w %{http_code} \
+            --retry 12     \
+            --retry-delay 1    \
+            --retry-max-time 60     \
+            --location $K_ENDPOINT:5601
+        echo "CURL OUTPUT: $output" >&3
+        # sleep for a 3 secs if failed
+        if [[ $output == 200 ]]; then
+          RESP=1
+          break
+        else
+          echo "Will retry, result was ${output}" >&3
+          sleep 30;
+        fi
+
+        ((ATTEMPTS++))
+      done
+
+      [[ $RESP == $GOOD ]]
+    }

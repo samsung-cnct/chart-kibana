@@ -28,11 +28,11 @@ env:
   #
   #NOTE: THE PASSWORD SHOULD BE PASSED IN ON THE COMMAND LINE
 security:
-  # ELASTICSEARCH_USERNAME: 
+  # ELASTICSEARCH_USERNAME:
   username: elastic
   # ELASTICSEARCH_PASSWORD:
   password: changeme
-  
+
 tolerations:
  # - key: taintKey
  #   value: taintValue
@@ -43,10 +43,10 @@ tolerations:
 #  Service options
 #
 #  default type is LoadBalancer
-#  With annotation: loadBalancer + external-dns 
-#  
-#  NOTE: comment out the annotations, or specifically 
-#  the external-dns.alpha.kubernetes.io/hostname annotation and value, 
+#  With annotation: loadBalancer + external-dns
+#
+#  NOTE: comment out the annotations, or specifically
+#  the external-dns.alpha.kubernetes.io/hostname annotation and value,
 #  if you are using an Ingress setup instead
 #
 #  recommended type is ClusterIP + Ingress
@@ -75,10 +75,13 @@ ingress:
   - key: nginx.ingress.kubernetes.io/auth-realm
     value: "Authentication required for kibana"
   tls:
-    enabled: false  #  enabling this assumes you have kube-lego running and assumes ingress.host is the same for tls  
+    enabled: false  #  enabling this assumes you have kube-lego running and assumes ingress.host is the same for tls
   host: kibana.externally-visible-dns.org
   auth: "uid:<MD5 has of password>\n"  #  username and password for accessing kibana.  set to empty for no auth, recommend using `htpasswd` locally and copying resultant MD5
-
+test:
+  image: quay.io/samsung_cnct/e2etester:prod
+  # username will be read from secret set for chart
+  # password will be read from secret set for chart
 scheduling:
   affinity:
     node:
