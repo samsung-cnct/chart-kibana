@@ -2,6 +2,14 @@ apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
   name: {{.Values.name}}
+  labels:
+    app.kubernetes.io/name: {{ template "name" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/version: {{ .Chart.AppVersion }}
+    app.kubernetes.io/component: infrastructure
+    app.kubernetes.io/part-of: logging-central
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+    helm.sh/chart: {{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}
 spec:
   replicas: {{.Values.replicas}}
   template:
