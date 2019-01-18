@@ -1,5 +1,5 @@
 name: kibana
-version: 0.1.10
+version: 0.1.11
 description: Sample chart template for registry
 keywords:
 - kubernetes
@@ -15,3 +15,5 @@ maintainers:
   email: oss-maintainer@samsung-cnct.io
 icon: https://github.com/samsung-cnct/solas/docs/images/samsung-logo.svg
 engine: gotpl
+# should match values.image version
+appVersion: 6.4.2
