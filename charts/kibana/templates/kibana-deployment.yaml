@@ -1,4 +1,4 @@
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: {{.Values.name}}
@@ -12,6 +12,9 @@ metadata:
     helm.sh/chart: {{ template "namewithversion" . }}
 spec:
   replicas: {{.Values.replicas}}
+  selector:
+    matchLabels:
+      component: {{.Values.component}}
   template:
     metadata:
       labels:
