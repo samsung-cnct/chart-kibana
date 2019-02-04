@@ -8,7 +8,7 @@ data:
     CACERT_FILE="/var/run/secrets/kubernetes.io/serviceaccount/ca.crt"
     TOKEN="$(< /var/run/secrets/kubernetes.io/serviceaccount/token)"
     KIBANA_FILE="/testfiles/kibana.txt"
-    KUBEAPI_URL="https://kubernetes.default.svc/api/v1/namespaces/{{ .Release.Namespace }}/services/kibana-logging"
+    KUBEAPI_URL="https://kubernetes.default.svc/api/v1/namespaces/{{ .Release.Namespace }}/services/{{.Values.name}}"
 
     # test 1
     @test "Grab kibana endpoint via curl kubeapi" {
@@ -34,6 +34,7 @@ data:
 
       echo "" >&3
       echo "---------------------------" >&3
+      # echo "$(cat $KIBANA_FILE)" >&3
       # Get the Kibana endpoint
       K_ENDPOINT=$(< $KIBANA_FILE jq -M -r '.spec.clusterIP' )
       echo "K_ENDPOINT is: $K_ENDPOINT" >&3
